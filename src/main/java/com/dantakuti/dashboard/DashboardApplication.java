@@ -14,7 +14,7 @@ public class DashboardApplication {
 		SpringApplication.run(DashboardApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner init(RoleRepository roleRepository) {
 
 		return args -> {
@@ -34,5 +34,5 @@ public class DashboardApplication {
 			}
 		};
 
-	}
+	}*/
 }
