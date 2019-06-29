@@ -16,6 +16,15 @@ HELP.md
 *.iml
 *.cmd
 
+###Maven
+*.mvn*
+
+##Application Properties
+*application.properties*
+
+
+
+
 
 
 
