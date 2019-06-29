@@ -17,30 +17,10 @@ import java.util.Set;
 @Configuration
 public class DBConfig {
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    /*@Bean
-    CommandLineRunner commandLineRunner(UserRepository repository){
-        Set<Role> roles = new HashSet<>();
-        Role admin = new Role();
-        admin.setRole("ADMIN");
-        admin.setId("1");
-        Role user = new Role();
-        user.setId("2");
-        user.setRole("USER");
-        roles.add(admin);
-        roles.add(user);
-        return i->{
-            repository.save(new DantaUser(1,"Aastha","aasthapoudel.ap@gmail.com",bCryptPasswordEncoder.encode("test"),"asdsada.jpg",roles));
-            repository.save(new DantaUser(2,"Aasthadarsh","adarshBhattarai@gmail.com",bCryptPasswordEncoder.encode("test"),"dasdad.jpg",roles));
-
-        };
-    }
-*/
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
+
 }
