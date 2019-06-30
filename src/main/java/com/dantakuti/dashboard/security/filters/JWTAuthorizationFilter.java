@@ -1,5 +1,6 @@
 package com.dantakuti.dashboard.security.filters;
 
+import com.dantakuti.dashboard.config.ApplicationProperties;
 import com.dantakuti.dashboard.constants.SecurityConstants;
 import com.dantakuti.dashboard.security.providers.CustomUserDetailService;
 import io.jsonwebtoken.Claims;
@@ -26,10 +27,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final CustomUserDetailService customUserDetailService;
 
+    private final ApplicationProperties applicationProperties;
 
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, CustomUserDetailService customUserDetailService) {
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, CustomUserDetailService customUserDetailService, ApplicationProperties applicationProperties) {
         super(authenticationManager);
         this.customUserDetailService = customUserDetailService;
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request,String token) {
             Claims claims = Jwts.parser()
-                    .setSigningKey(SECRET)
+                    .setSigningKey(applicationProperties.getSecretKey())
                     .parseClaimsJws(token)
                     .getBody();
 

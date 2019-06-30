@@ -38,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     ErrorAuthEntryPoint entryPoint;
 
+    @Autowired
+    ApplicationProperties applicationProperties;
+
     private UserDetailsService mongodbUserDetail() {
         return customUserDetailService;
     }
@@ -64,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilter(new JWTAuthorizationFilter(authenticationManager(),customUserDetailService));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(),customUserDetailService,applicationProperties));
         //http.headers().cacheControl();
     }
 
