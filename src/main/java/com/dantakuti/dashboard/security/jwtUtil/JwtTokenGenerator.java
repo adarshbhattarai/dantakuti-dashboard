@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import static com.dantakuti.dashboard.constants.SecurityConstants.EXPIRATION_TIME;
 
@@ -32,7 +30,6 @@ public class JwtTokenGenerator {
         Claims claims = Jwts.claims()
                 .setSubject(username);
 
-        System.out.println("Secret Key is " +applicationProperties.getSecretKey());
         DantaUser user = userRepository.findByEmail(username);
 
         claims.put("picture",user.getPicture());

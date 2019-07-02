@@ -1,28 +1,14 @@
 package com.dantakuti.dashboard.controller;
 
-import com.dantakuti.dashboard.constants.SecurityConstants;
 import com.dantakuti.dashboard.document.User;
-import com.dantakuti.dashboard.security.jwtUtil.JwtTokenGenerator;
 import com.dantakuti.dashboard.service.LoginService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
-import java.util.*;
-
-import static com.dantakuti.dashboard.constants.SecurityConstants.*;
-import static com.dantakuti.dashboard.constants.SecurityConstants.TOKEN_PREFIX;
 
 /**
  * @author adarshbhattarai on 2019-06-15
