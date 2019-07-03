@@ -1,19 +1,19 @@
 package com.dantakuti.dashboard.controller;
 import com.dantakuti.dashboard.document.DantaUser;
 import com.dantakuti.dashboard.document.Role;
+import com.dantakuti.dashboard.document.User;
 import com.dantakuti.dashboard.repository.UserRepository;
 import com.dantakuti.dashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200" , maxAge = 3600)
 @RequestMapping("/rest/users")
 public class UserController {
 
@@ -29,7 +29,6 @@ public class UserController {
 
     @GetMapping("/")
     public List<DantaUser> getAllUsers(){
-
         return  userService.getAllUsers();
     }
 
@@ -52,8 +51,14 @@ public class UserController {
         user.setRole("USER");
         roles.add(admin);
         roles.add(user);
-        userRepository.save(new DantaUser(6,"Aastha Poudel","aastha.poudeladarsh@gmail.com",bCryptPasswordEncoder.encode("test"),"asdsada.jpg",roles));
-        userRepository.save(new DantaUser(7,"Adarsh Bhattarai","adarsh.bhat7@gmail.com",bCryptPasswordEncoder.encode("test"),"dasdad.jpg",roles));
+    }
 
+    @PostMapping("/value")
+    public void loginInuser(@RequestBody User user){
+
+
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        System.out.println("Here");
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("rest/medical-profile")
+@RequestMapping("/rest/medical-profile")
 public class MedicalProfileController {
 
     @Autowired
@@ -27,6 +27,7 @@ public class MedicalProfileController {
 
     @PostMapping("/")
     public MedicalProfile createMedicalProfile(@RequestBody MedicalProfile medicalProfile){
+
         return medicalProfileService.createMedicalProfile(medicalProfile);
     }
 
