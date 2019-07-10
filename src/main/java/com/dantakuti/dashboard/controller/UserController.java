@@ -41,7 +41,6 @@ public class UserController {
 
     @GetMapping("/save")
     public void saveAll(){
-
         Set<Role> roles = new HashSet<>();
         Role admin = new Role();
         admin.setRole("ADMIN");
@@ -55,8 +54,6 @@ public class UserController {
 
     @PostMapping("/value")
     public void loginInuser(@RequestBody User user){
-
-
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
         System.out.println("Here");
