@@ -30,7 +30,7 @@ public class RegistrtaionServiceImpl implements RegistrationService {
         throw new ServletException("Username/Password or Name not provided");
     }
 
-        return jsonObject.toString();
+        return jsonObject.toString();//just for testing
 
     }
 
