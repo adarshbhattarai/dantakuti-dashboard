@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
  * @project dashboard
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200" , maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200" , maxAge = 3600)
 @RequestMapping("/auth")
 public class LoginController {
 
