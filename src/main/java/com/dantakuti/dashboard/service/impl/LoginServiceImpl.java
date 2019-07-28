@@ -21,8 +21,6 @@ import java.util.Map;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-
-
     @Autowired
     AuthenticationManager authenticationManager;
 
