@@ -10,4 +10,6 @@ implementation under impl dir
 public interface RegistrationService {
 
     String register(RegisteredUser user) throws ServletException;
+
+    boolean checkUserExists(RegisteredUser user) throws ServletException;
 }
