@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 
 
-public  interface UserRepository extends MongoRepository<DantaUser, Integer> {
+public  interface UserRepository extends MongoRepository<DantaUser, String> {
 
     DantaUser findByEmail(String email);
 }

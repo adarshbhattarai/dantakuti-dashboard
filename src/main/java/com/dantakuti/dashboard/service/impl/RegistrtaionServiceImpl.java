@@ -1,8 +1,6 @@
 package com.dantakuti.dashboard.service.impl;
 
 import com.dantakuti.dashboard.document.DantaUser;
-import com.dantakuti.dashboard.document.RegisteredUser;
-import com.dantakuti.dashboard.document.User;
 import com.dantakuti.dashboard.repository.UserRepository;
 import com.dantakuti.dashboard.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 import com.dantakuti.dashboard.security.jwtUtil.JwtTokenGenerator;
 import org.json.JSONObject;
-import org.springframework.stereotype.Repository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
@@ -28,30 +26,30 @@ public class RegistrtaionServiceImpl implements RegistrationService {
     @Autowired
     private UserRepository repo;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
-    public String register(RegisteredUser registeredUser) throws ServletException{
+    public void register(DantaUser dantaUser) throws ServletException{
 
     JSONObject jsonObject=null;
 
-
-    if (registeredUser.getEmailAddress() == null || registeredUser.getPassword() == null || registeredUser.getFullName()==null ) {
+    if (dantaUser.getEmail() == null || dantaUser.getPassword() == null || dantaUser.getName()==null ) {
         throw new ServletException("Username/Password or Name not provided");
     }
 
-    if(checkUserExists(registeredUser)) {
-        throw new ServletException("Email address already exists!!");
-    }
+    String password=dantaUser.getPassword();
+    dantaUser.setPassword(bCryptPasswordEncoder.encode(password));
+    repo.save(dantaUser);
 
-//    repo.save(new DantaUser)
-        return jsonObject.toString();//just for testing
     }
 
     @Override
-    public boolean checkUserExists(RegisteredUser user) throws ServletException {
+    public boolean checkUserExists(DantaUser user) throws ServletException {
         DantaUser testUser=null;
         boolean userFound=false;
         try {
-            testUser = repo.findByEmail(user.getEmailAddress());
+            testUser = repo.findByEmail(user.getEmail());
             userFound=true;
         }
         catch (Exception e) {

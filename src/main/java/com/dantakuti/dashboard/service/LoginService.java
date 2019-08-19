@@ -1,5 +1,6 @@
 package com.dantakuti.dashboard.service;
 
+import com.dantakuti.dashboard.document.DantaUser;
 import com.dantakuti.dashboard.document.User;
 
 import javax.servlet.ServletException;

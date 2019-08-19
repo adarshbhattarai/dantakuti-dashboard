@@ -13,7 +13,7 @@ import java.util.Set;
 public class DantaUser {
 
     @Id
-    private Integer id;
+    private String id;
     private String name;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String email;
@@ -22,7 +22,7 @@ public class DantaUser {
     @DBRef
     private Set<Role> roles;
 
-    public DantaUser(Integer id, String name, String email,String password, String picture, Set<Role> roles) {
+    public DantaUser(String id, String name, String email,String password, String picture, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -31,11 +31,11 @@ public class DantaUser {
         this.roles = roles;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

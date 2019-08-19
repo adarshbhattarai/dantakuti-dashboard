@@ -2,14 +2,15 @@ package com.dantakuti.dashboard.service;
 
 import javax.servlet.ServletException;
 
-import com.dantakuti.dashboard.document.RegisteredUser;
+import com.dantakuti.dashboard.document.DantaUser;
+
 /*/
 Registration interface
 implementation under impl dir
  */
 public interface RegistrationService {
 
-    String register(RegisteredUser user) throws ServletException;
+    void register(DantaUser user) throws ServletException;
 
-    boolean checkUserExists(RegisteredUser user) throws ServletException;
+    boolean checkUserExists(DantaUser user) throws ServletException;
 }
