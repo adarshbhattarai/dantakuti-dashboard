@@ -22,8 +22,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static com.dantakuti.dashboard.constants.SecurityConstants.LOGIN_URL;
-
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableWebSecurity
@@ -59,7 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint())
                 .permitAll()
-                .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/public/**").permitAll()
+               // .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .antMatchers("/rest/**").authenticated()
                 .anyRequest().authenticated()
                 .and()

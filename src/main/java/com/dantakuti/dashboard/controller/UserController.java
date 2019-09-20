@@ -1,45 +1,48 @@
 package com.dantakuti.dashboard.controller;
+
 import com.dantakuti.dashboard.document.DantaUser;
-import com.dantakuti.dashboard.document.Role;
 import com.dantakuti.dashboard.document.User;
-import com.dantakuti.dashboard.repository.UserRepository;
-import com.dantakuti.dashboard.service.UserService;
+import com.dantakuti.dashboard.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.servlet.ServletException;
 
+/**
+ * @author adarshbhattarai on 2019-06-15
+ * @project dashboard
+ */
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200" , maxAge = 3600)
-@RequestMapping("/rest/users")
+@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
-    @GetMapping("/")
-    public List<DantaUser> getAllUsers(){
-        return  userService.getAllUsers();
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> loginInuser(@RequestBody User user) throws ServletException {
+        String token = userService.login(user);
+        if(token == null)
+            return new ResponseEntity<String>("", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
-    @GetMapping("/users")
-    public DantaUser findByUser(){
-
-        String email = userService.getAllUsers().get(0).getEmail();
-        return  userRepository.findByEmail(email);
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> loginInuser(@RequestBody DantaUser dantaUser) throws ServletException {
+        boolean registerUser = userService.register(dantaUser);
+        if(!registerUser)
+            return new ResponseEntity<String>("User Already Exist", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("", HttpStatus.OK);
     }
 
-    @GetMapping("/save")
+ /*   @GetMapping("/save")
     public void saveAll(){
         Set<Role> roles = new HashSet<>();
         Role admin = new Role();
@@ -50,12 +53,6 @@ public class UserController {
         user.setRole("USER");
         roles.add(admin);
         roles.add(user);
-    }
+    }*/
 
-    @PostMapping("/value")
-    public void loginInuser(@RequestBody User user){
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        System.out.println("Here");
-    }
 }
