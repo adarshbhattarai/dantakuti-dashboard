@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- use the font -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;">
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+    <tr>
+        <td align="center" bgcolor="#78ab46" style="padding: 40px 0 30px 0;">
+            <h3> Dantakuti Dental Clinic. </h3>
+            <a href="www.dantakuti.com" style="display: block;"> www.dantakuti.com</a>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
+            <p>Dear <b><span th:text="${bookingDetail.getFirstName()}"></span></b>,</p>
+
+            <p>We would like to inform that you have scheduled an appointment on </p>
+            <p> <b th:text="${#dates.format(bookingDetail.getAppointment().getAppointmentDate(), 'dd MMM yyyy')}">${bookingDetail.getAppointmentDate().getAppointmentDate()}</b> at
+                <b th:text="${bookingDetail.getAppointment().getAppointmentTime()}">${bookingDetail.getAppointmentDate().getAppointmentTime()}</b>. o' clock.</p>
+            <p>
+                You can find your <b>CheckUp Details</b> just below this text.
+            </p>
+            <ul th:remove="all-but-first">
+                <b> <li th:each="checkup : ${bookingDetail.getCheckUps()}" th:text="${checkup.getName()}">${checkup.getName()}</li></b>
+            </ul>
+
+            <h4> Based on the information provided, following is your appointment detail.  </h4>
+            <p> <b>Name: </b><span th:if="${bookingDetail.getGender()} == 'M'">Mr. </span> <span th:if="${bookingDetail.getGender()} == 'F'">Mrs. </span></span> <span th:text="${bookingDetail.getFirstName()}+' ' + ${bookingDetail.getLastName()}"> </span></p>
+            <p> <b>Phone Number: </b><span th:text="${bookingDetail.getPhoneNumber()}"> </span></p>
+            <p> <b>Email: </b><span th:text="${bookingDetail.getEmail()}"> </span></p>
+            <p> <b>Brief Information: </b><span th:text="${bookingDetail.getAdditionalDetails()}"> </span></p>
+            <br />
+            <p> We are looking forward to seeing you soon. </p>
+            <p> Thank you for scheduling an appointment with us. </p>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
+            <p>
+                Regards, <br />
+                <em>Dantakuti Dental Clinic</em>  <br />
+                <em>Balaju, Nepal</em> <br />
+                <em>+977-01-4386128</em>  <br />
+                <em>dantakuti2019@gmail.com</em>  <br />
+
+            </p>
+        </td>
+    </tr>
+</table>
+
+</body>
+
+</html>
